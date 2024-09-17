@@ -19,7 +19,7 @@ public:
         for(int i=startingCol;i<=endingCol&&count<total;i++){
         
           ans.push_back(matrix[startingRow][i]);
-count++;
+ count++;
         }
         startingRow++;
       
