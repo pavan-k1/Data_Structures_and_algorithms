@@ -1,3 +1,7 @@
+//Problem-->Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
+//You must do it in place.
+
+
 #include<iostream>
 #include<vector>
 using namespace std;
@@ -54,7 +58,7 @@ firstrow=1;
 int main() {
     int rows, cols,target;
     
-    // Get the number of rows and columns from the user
+
     cout << "Enter the number of rows: ";
     cin >> rows;
     
@@ -68,14 +72,14 @@ int main() {
  
     cout << "Enter the matrix elements:\n";
     for(int i = 0; i < rows; ++i) {
-        // Resize the current row to have 'cols' columns
+      
         vector<int> row;
         for(int j = 0; j < cols; ++j) {
             int element;
             cin >> element;
-            row.push_back( element);  // Fill the row with input elements
+            row.push_back( element);  
         }
-        matrix.push_back(row);  // Add the row to the matrix
+        matrix.push_back(row);  
     }
     
     for (int i=0;i<rows;i++){
