@@ -30,29 +30,52 @@ tail=temp;
 
 
 }
-Node* removeDuplicatesUnsorted(Node* head){
-    if(head==NULL){
-        return NULL;
-    }
-    Node* current=head;
-    
-    while(current->next!=NULL){
-        Node* temp=current;
-        while(temp->next!=NULL){
-            if(current->data==temp->next->data){
-                 Node* nodetodelete=temp->next;
-        temp->next=temp->next->next;
-        delete nodetodelete;
 
-            }
-            else{
-                temp=temp->next;
-            }
-        }
+Node* removeDuplicatesUnsorted(Node* head){
+   map<int,bool>visited;
+   Node* current=head;
+   Node* prev=NULL;
+   while(current->next!=NULL){
+    if(visited[current->data]!=true){
+        visited[current->data]=true;
+        prev=current;
         current=current->next;
+        
     }
-    return head;
+    else{
+        visited[current->data]=true;
+        prev->next=current->next;
+        Node* nodetodelete=current;
+        current=current->next;
+        delete nodetodelete;
+    }
+   }
+   return head;
 }
+
+// Node* removeDuplicatesUnsorted(Node* head){
+//     if(head==NULL){
+//         return NULL;
+//     }
+//     Node* current=head;
+    
+//     while(current->next!=NULL){
+//         Node* temp=current;
+//         while(temp->next!=NULL){
+//             if(current->data==temp->next->data){
+//                  Node* nodetodelete=temp->next;
+//         temp->next=temp->next->next;
+//         delete nodetodelete;
+
+//             }
+//             else{
+//                 temp=temp->next;
+//             }
+//         }
+//         current=current->next;
+//     }
+//     return head;
+// }
 
 Node* removeDuplicatesSorted(Node* head ){
 if(head==NULL){
