@@ -30,80 +30,51 @@ tail=temp;
 
 
 }
+Node* removeDuplicatesUnsorted(Node* head){
+    if(head==NULL){
+        return NULL;
+    }
+    Node* current=head;
+    
+    while(current->next!=NULL){
+        Node* temp=current;
+        while(temp->next!=NULL){
+            if(current->data==temp->next->data){
+                 Node* nodetodelete=temp->next;
+        temp->next=temp->next->next;
+        delete nodetodelete;
 
+            }
+            else{
+                temp=temp->next;
+            }
+        }
+        current=current->next;
+    }
+    return head;
+}
 
-
-//Method 1: using the visited map approach
-// bool detectLoop(Node* head){
-// if(head==NULL){
-//     return false;
-// }
-// map<Node*,bool>visited;
-// Node* temp=head;
-// while(temp!=NULL){
-//     if(visited[temp]==true){
-//         return true;
-//     }
-//     visited[temp]=true;
-//     temp=temp->next;
-// }
-// return false;
-
-
-// }
-//Method 2:using the slow fast pointers approach
-Node* detectLoop(Node* head){
-Node* fast=head;
-Node* slow=head;
+Node* removeDuplicatesSorted(Node* head ){
 if(head==NULL){
-        return NULL;
-    }
-while(fast!=NULL&&slow!=NULL){
-    fast=fast->next;
-    if(fast!=NULL){
-        fast=fast->next;
-    }
-    
-  
-    
-   
-        slow=slow->next;
-        
-      if(fast==slow){
-       return slow;
-    }
-}
 return NULL;
+
+}
+Node* current=head;
+
+while(current!=NULL){
+    if(current->next!=NULL&&current->next->data==current->data){
+        Node* nodetodelete=current->next;
+        current->next=current->next->next;
+        delete nodetodelete;
+
+    }
+    else{
+        current=current->next;
+    }
 }
 
-Node* startingPoint(Node* head){
-    if(head==NULL){
-        return NULL;
-    }
-
-    Node* fast=detectLoop(head);
-    Node* slow=head;
-    while(slow!=fast){
-        slow=slow->next;
-        fast=fast->next;
-    }
-    return slow;
+return head;
 }
-
-void removeLoop(Node* head){
-    if(head==NULL){
-        return;
-    }
-Node* startofLoop=startingPoint(head);
-Node* temp=startofLoop;
-    while(temp->next!=startofLoop){
-temp=temp->next;
-    }
-    temp->next=NULL;
-}
-
-
-
 
 void printLL(Node* &head){
 
@@ -126,32 +97,17 @@ Node* head=node1;
 
 Node* tail=node1;
 
-insertAttail(tail,20);
-insertAttail(tail,30);
-insertAttail(tail,40);
 insertAttail(tail,50);
-insertAttail(tail,60);
-
-// cout<<"before inserting at the middle";
-tail->next=head->next;
-// printLL(head);
-
-
-if(detectLoop(head)!=NULL){
-    cout<<"there is a loop present in the given linked list ";
-}
-else{
-    cout<<"no loop present";
-}
-
-cout<<"the starting point of loop is --->"<<startingPoint(head)->data<<endl;
-cout<<"going to remove loop";
-removeLoop(head);
-cout<<"loop removed now the linked list is";
+insertAttail(tail,20);
+insertAttail(tail,15);
+insertAttail(tail,50);
+insertAttail(tail,19);
+cout<<"Before removing duplicates"<<endl;
 printLL(head);
-
-
-
+// removeDuplicatesSorted(head);
+removeDuplicatesUnsorted(head);
+cout<<"After removing duplicates"<<endl;
+printLL(head);
 
 
 return 0;
