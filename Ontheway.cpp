@@ -1,93 +1,97 @@
 #include<iostream>
-
 using namespace std;
 
 class stack{
-public:
-int *arr;//pointer that will make dynamic array
-int top ;
-int size;
+    public:
+    int data;
+    stack* top;
+    stack* next;
+    int size;
+    int count;
 
+    stack(int size,int data){
+        this->data=data;
+        this->size=size;
+        this->next=NULL;
+        this->top=NULL;
+        this->count=0;
+    }
 
-stack(int size){
-    this->size=size;
-    top=-1;
-    arr=new int[size];//creation of dynamic array of given size;
-}
+    void push(stack* &head,int element){
+        if(size-count>0){
 
-void push(int element){
-if(size-top>1){
-top++;
-arr[top]=element;
-
-}
-else{
-    cout<<"stack overflow!!"<<endl;
-    
-}
-}
-void pop(){
-if(top==-1){
-    cout<<"stack underflow!!"<<endl;
-}
-else{
-    top--;
-}
-}
-bool empty(){
-if(top==-1){
-    return true;
-}
-else{
-    return false;
-}
-}
-int peek(){
-    if(top==-1){
-        cout<<"stack underflow!! "<<endl;
-        return -1;
-     
+         if(head==NULL){
+        stack* node=new stack(size,element);
+        head=node;
+        node->next=NULL;
+        count++;
+        }
+       
+        else{
+            stack* temp=head;
+    stack* node=new stack(size,element);
+    head=node;
+    node->next=temp;
+    count++;
+        }
+        top=head;
     }
     else{
-        int topelement=arr[top];
-        return topelement;
+        cout<<"stack overflow!!";
     }
 }
+
+
+    void pop(stack* &head){
+        if(top!=NULL){
+            stack* temp=top;
+            head=head->next;
+            top=head;
+            temp->next=NULL;
+            delete temp;
+            count--;
+
+        }
+        else{
+            cout<<"stack underflow!!"<<endl;
+        }
+    }
+
+    int peek(){
+        if(top!=NULL){
+            return top->data;
+        }
+else{
+    cout<<"stack underflow!!"<<endl;
+    return -1;
+}
+    }
+
 };
 
+
 int main(){
-    stack s(5);
-s.push(2);
-s.push(3);
-s.push(4);
-s.pop();
-s.pop();
-s.pop();
-cout<<"Printing top element-->"<<s.peek()<<endl;
+    stack s(5,0);
+    stack* head=NULL;
 
-if(s.empty()){
-    cout<<"the stack is empty"<<endl;
-}
-else{
-    cout<<"the stack is not empty"<<endl;
-}
-// cout<<"the stack size is "<<s.size();
+   
+s.push(head,2);
+s.push(head,3);
+s.push(head,4);
+s.push(head,5);
 
-// stack<int>s;
-// s.push(2);
-// s.push(3);
-// s.push(4);
-// s.pop();
-// cout<<"Printing top element-->"<<s.top()<<endl;
 
-// if(s.empty()){
-//     cout<<"the stack is empty"<<endl;
-// }
-// else{
-//     cout<<"the stack is not empty"<<endl;
-// }
-// cout<<"the stack size is "<<s.size();
+s.pop(head);
+s.pop(head);
+s.pop(head);
 
+s.pop(head);
+// s.push(head,3);
+// s.pop(head);
+// s.pop(head);
+
+// cout<<head->data;
+cout<<"the stack top is ---->"<<s.peek()<<endl;
 
 
 
