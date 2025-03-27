@@ -67,6 +67,29 @@ else{
 }
     }
 
+    void deletemiddleele(stack* &head){
+        stack* previous=NULL;
+        stack* slow=head;
+        stack* fast=head->next;
+        while(fast!=NULL&&fast->next!=NULL){
+            fast=fast->next->next;
+            previous=slow;
+            slow=slow->next;
+            
+        }
+        previous->next=slow->next;
+        slow->next=NULL;
+        delete slow;
+    }
+
+    void printStack(stack* head){
+        stack* temp=head;
+while(temp!=NULL){
+    cout<<temp->data<<endl;
+    temp=temp->next;
+}
+    }
+
 };
 
 
@@ -78,21 +101,16 @@ int main(){
 s.push(head,2);
 s.push(head,3);
 s.push(head,4);
-s.push(head,5);
 
 
-s.pop(head);
-s.pop(head);
-s.pop(head);
-
-s.pop(head);
-// s.push(head,3);
-// s.pop(head);
-// s.pop(head);
-
-// cout<<head->data;
-cout<<"the stack top is ---->"<<s.peek()<<endl;
 
 
+
+cout<<"printing stack before deleting middle element"<<endl;
+s.printStack(head);
+s.deletemiddleele(head);
+cout<<"printing stack after deleting middle element"<<endl;
+s.printStack(head);
+return 0;
 
 }
